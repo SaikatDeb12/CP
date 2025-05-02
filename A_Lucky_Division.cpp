@@ -1,5 +1,5 @@
 // Author: Saikat_deb | Created: 2025-04-30 13:16
-#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC optimize("O3,unroll-loops") // ac
 #include <bits/stdc++.h>
 
 // C:\msys64\mingw64\include\c++\11.2.0\ext\pb_ds\detail\resize_policy
