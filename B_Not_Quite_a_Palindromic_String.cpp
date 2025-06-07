@@ -1,4 +1,4 @@
-// Author: Saikat_deb | Created: 2025-05-26 20:15
+// Author: Saikat_deb | Created: 2025-06-07 12:05
 #pragma GCC optimize("O3,unroll-loops")
 #include <bits/stdc++.h>
 
@@ -101,102 +101,29 @@ void solve()
     cin >> n >> k;
     string s;
     cin >> s;
+
     vi cnt(2);
     itr(i, n)
     {
         cnt[s[i] - '0']++;
     }
 
-    if ((cnt[0] > 0 and cnt[1] == 0) or (cnt[0] == 0 and cnt[1] > 0))
+    int mn = max(cnt[0], cnt[1]) - n / 2;
+    int mx = (cnt[0] / 2) + (cnt[1] / 2);
+    // dbg(mn, mx);
+    // stupid logic
+    if (k >= mn and (k - mn) % 2 == 0 and k <= mx)
     {
-        if (k == 0)
-        {
-            cout << "NO\n";
-            return;
-        }
-    }
-
-    // cout << cnt[0] << " " << cnt[1] << " ";
-    if (cnt[0] % 2 == 0 and cnt[1] % 2 == 0)
-    {
-        int total = cnt[0] / 2 + cnt[1] / 2;
-        if (k == 0)
-        {
-            if (cnt[0] == 2 and cnt[1] == 2)
-                cout << "YES\n";
-            else
-                cout << "NO\n";
-        }
-        else if ((cnt[0] == 0 or cnt[1] == 0) and k < total)
-            cout << "NO\n";
-        else if (k == total)
-            cout << "YES\n";
-        else if (k > total)
-            cout << "NO\n";
-        else
-        {
-            if (k & 1)
-                cout << "YES\n";
-            else
-                cout << "NO\n";
-        }
-    }
-    else if (cnt[0] & 1 and cnt[1] & 1)
-    {
-        int total = (cnt[0] - 1) / 2 + (cnt[1] - 1) / 2;
-        if (k == 0)
-        {
-            if (cnt[0] == 1 and cnt[1] == 1)
-                cout << "YES\n";
-            else
-                cout << "NO\n";
-        }
-        else if ((cnt[0] == 0 or cnt[1] == 0) and k < total)
-        {
-            cout << "NO\n";
-            return;
-        }
-        else if (k == total)
-            cout << "YES\n";
-        else if (k > total)
-            cout << "NO\n";
-        else
-        {
-            if (k & 1)
-                cout << "NO\n";
-            else
-                cout << "YES\n";
-        }
+        cout << "YES\n";
+        // if (k - mn % 2 == 0)
+        // {
+        //     cout << "YES\n";
+        // }
+        // else
+        //     cout << "NO\n";
     }
     else
-    {
-        if (cnt[0] & 1)
-            cnt[0]--;
-        if (cnt[1] & 1)
-            cnt[1]--;
-        int total = cnt[0] / 2 + cnt[1] / 2;
-        if (k == 0)
-        {
-            cout << "YES\n";
-            return;
-        }
-        if ((cnt[0] == 0 or cnt[1] == 0) and k < total)
-        {
-            cout << "NO\n";
-            return;
-        }
-        else if (k == total)
-            cout << "YES\n";
-        else if (k > total)
-            cout << "NO\n";
-        else
-        {
-            if (k & 1)
-                cout << "YES\n";
-            else
-                cout << "NO\n";
-        }
-    }
+        cout << "NO\n";
 }
 
 int main()
