@@ -119,15 +119,9 @@ void solve()
     {
         values[i] = a[i].first;
         sum += a[i].first * 1LL;
-        // prefix[i] = sum;
         prefix.push_back(sum);
     }
 
-    // vi ans(n);
-    // ans[a[n-1].second]=n-1;
-    dbg(a);
-    dbg(values);
-    dbg(prefix);
     vi ans(n);
     ans[n - 1] = n - 1;
 
@@ -137,13 +131,10 @@ void solve()
         if (prefix[i] >= values[i + 1])
         {
             cnt += ans[i + 1] - (i + 1) + 1;
-            dbg(i);
-            // cnt += ans[i + 1] - 1;
-            // cnt++;
         }
         ans[i] = cnt;
     }
-    dbg(ans);
+    // dbg(ans);
 
     vi fnlAns(n);
     itr(i, n)
