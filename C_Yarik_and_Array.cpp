@@ -147,6 +147,7 @@ void solve()
         }
 
         int sum = 0;
+        // little bug in the sub-array logic
         while (i <= j and i <= till and j <= till)
         {
             sum += a[j];
