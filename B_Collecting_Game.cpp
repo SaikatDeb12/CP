@@ -1,4 +1,4 @@
-// Author: Saikat_deb | Created: 2025-06-12 23:32
+// Author: Saikat_deb | Created: 2025-06-13 01:39
 #pragma GCC optimize("O3,unroll-loops")
 #include <bits/stdc++.h>
 
@@ -109,40 +109,48 @@ void solve()
     }
 
     sort(a.begin(), a.end());
-    LL sum = a[0].first;
-    vl prefix(n);
-    vl values(n);
-    prefix[0] = a[0].first;
-    values[0] = a[0].first;
 
+    LL sum = a[0].first;
+    vl prefix;
+    vl values(n);
+    prefix.push_back(a[0].first);
+    values[0] = a[0].first;
     for (int i = 1; i < n; i++)
     {
         values[i] = a[i].first;
         sum += a[i].first * 1LL;
-        prefix[i] = sum;
+        // prefix[i] = sum;
+        prefix.push_back(sum);
     }
 
+    // vi ans(n);
+    // ans[a[n-1].second]=n-1;
     dbg(a);
+    dbg(values);
+    dbg(prefix);
     vi ans(n);
+    ans[n - 1] = n - 1;
+
+    for (int i = n - 2; i >= 0; i--)
+    {
+        int cnt = i;
+        if (prefix[i] >= values[i + 1])
+        {
+            cnt += ans[i + 1] - (i + 1) + 1;
+            dbg(i);
+            // cnt += ans[i + 1] - 1;
+            // cnt++;
+        }
+        ans[i] = cnt;
+    }
+    dbg(ans);
+
+    vi fnlAns(n);
     itr(i, n)
     {
-        int cnt = i, ind = 0;
-        LL currentSum = values[i];
-        if (i > 0)
-        {
-            currentSum += prefix[i - 1];
-            dbg(values[i] + prefix[i - 1]);
-        }
-        ind = lower_bound(values.begin(), values.end(), currentSum) - values.begin();
-        dbg(ind - 1);
-        if (i > 0)
-            cnt -= i;
-        cnt += (ind - 1);
-        ans[a[i].second] = cnt;
+        fnlAns[a[i].second] = ans[i];
     }
-    for (auto i : ans)
-        cout << i << " ";
-    cout << "\n";
+    write(fnlAns);
 }
 
 int main()
